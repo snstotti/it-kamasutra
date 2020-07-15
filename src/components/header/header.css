@@ -1,0 +1,11 @@
+.header {
+    height: 100px;
+    background-color: #05AB60;
+    margin: 10px;
+    text-align: left;
+}
+
+.icon {
+    width: 100px;
+    margin:0;
+}
