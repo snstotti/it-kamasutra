@@ -1,11 +1,11 @@
 import React from 'react'
-import './header.css'
+import s from './header.module.css'
 import icon from './basketball.ico'
 
 const Header = ()=> {
     return (
-        <div className='header'>
-            <img src={icon} alt='' className='icon'/>
+        <div className={s.header}>
+            <img src={icon} alt='' className={s.icon}/>
         </div>
     )
 }
