@@ -1,4 +1,19 @@
 .dialogs {
     width: 100%;
     background-color: darkcyan;
+    display: flex;
 }
+.dialogs__item {
+    padding: 20px;
+    color: #493641;
+    font-size: 20px;
+}
+
+.messages {
+    padding: 20px;
+}
+
+.active {
+    
+}
+

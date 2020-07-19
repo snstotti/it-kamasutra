@@ -1,7 +1,8 @@
 .navBar{
     width: 30%;
     background-color: #05AB60;
-   
+    margin: 0 10px 0 0;
+
 }
 
 .list {
@@ -9,6 +10,7 @@
     padding: 0;
     margin: 0;
     text-align: left;
+    padding: 10px;
 }
 
 .list__item{
@@ -19,4 +21,8 @@
     text-decoration: none;
     color: cornsilk;
     font-size: 25px;
+}
+
+.activeLink{
+    color: rgb(114, 111, 111);
 }

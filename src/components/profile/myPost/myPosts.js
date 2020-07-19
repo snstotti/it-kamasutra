@@ -3,7 +3,13 @@ import s from './myPosts.module.css'
 import Post from './post/post'
 
 
-const MyPosts = () => {
+const MyPosts = ({myPostsData}) => {
+
+    let myPostsElements = myPostsData
+    .map(el=>{
+        return <Post key={el.id} message={el.post} />
+    })
+
     return (
         <div className={s.myPosts}>
             <div>
@@ -20,8 +26,9 @@ const MyPosts = () => {
                 </div>
             </div>
 
-            <Post message={`It's my first post`} />
-            <Post message={`Hello, hou are you`} />
+            
+           {myPostsElements}
+            
         </div>
     )
 }

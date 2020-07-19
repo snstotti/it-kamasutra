@@ -1,28 +1,11 @@
 .content{
     width: 100%;
     background-color: blueviolet;
-    margin: 10px;
+    
 }
 
-.content__image{
-    height: 140px;
-    width: 100%;
-}
 
-.avatar__image {
-    width: 100px;
-    border-radius: 50%;
+
+.myPosts {
     padding: 10px;
-}
-
-.profile {
-    display: flex;
-}
-
-.profile__name {
-    margin: 10px 0;
-}
-
-.profile__description {
-    padding-left: 20px;
 }
