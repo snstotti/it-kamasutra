@@ -1,0 +1,11 @@
+.friend__avatar {
+    padding: 5px;
+    width: 40px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background-color: blue;
+}
+
+.friends__block {
+
+}
