@@ -1,20 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import state from './redux/state'
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+const { rerenderTree } = require("./render")
 
 
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App state={state} />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
 
 
-serviceWorker.unregister();
+
+
+rerenderTree(state)
+
+
 
 if(module.hot){
   module.hot.accept()

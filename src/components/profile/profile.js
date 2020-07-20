@@ -5,7 +5,7 @@ import ProfileInfo from './profileInfo/profileInfo'
 
 
 
-const Profile = ({profilePage}) => {
+const Profile = ({profilePage , addPost}) => {
 
     const {myPostsData} = profilePage
 
@@ -14,7 +14,7 @@ const Profile = ({profilePage}) => {
             <ProfileInfo name='Nikola' />
 
             <div className={s.myPosts}>
-                <MyPosts myPostsData={myPostsData} />
+                <MyPosts myPostsData={myPostsData} addPost={addPost} />
             </div>
         </div>
     )

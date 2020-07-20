@@ -7,7 +7,7 @@ import Dialogs from './components/dialogs/dialogs';
 import { Route, BrowserRouter } from 'react-router-dom'
 // import Content
 
-function App({state}) {
+function App({state, addPost}) {
   
   const {dialogsPage, profilePage} = state
 
@@ -18,7 +18,7 @@ function App({state}) {
         <div className='contentBlock'>
           <NavBar />
           <Route path='/messages' render={()=><Dialogs dialogsPage={dialogsPage} />} />
-          <Route path='/profile' render={()=><Profile profilePage={profilePage} />} />
+          <Route path='/profile' render={()=><Profile profilePage={profilePage} addPost={addPost} />} />
         </div>
       </div>
     </BrowserRouter>
