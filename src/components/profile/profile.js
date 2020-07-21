@@ -5,16 +5,20 @@ import ProfileInfo from './profileInfo/profileInfo'
 
 
 
-const Profile = ({profilePage , addPost}) => {
+const Profile = ({profilePage , addPost, onPostChange}) => {
 
-    const {myPostsData} = profilePage
+    const {myPostsData, newPostText} = profilePage
 
     return (
         <div className={s.content}>
             <ProfileInfo name='Nikola' />
 
             <div className={s.myPosts}>
-                <MyPosts myPostsData={myPostsData} addPost={addPost} />
+                <MyPosts 
+                    myPostsData={myPostsData} 
+                    newPostText={newPostText} 
+                    addPost={addPost}
+                    onPostChange={onPostChange} />
             </div>
         </div>
     )

@@ -5,7 +5,8 @@ import Header from './components/header/header';
 import NavBar from './components/navBar/navBar';
 import Dialogs from './components/dialogs/dialogs';
 import { Route, BrowserRouter } from 'react-router-dom'
-// import Content
+import { onPostChange } from './redux/state';
+
 
 function App({state, addPost}) {
   
@@ -17,8 +18,12 @@ function App({state, addPost}) {
         <Header />
         <div className='contentBlock'>
           <NavBar />
-          <Route path='/messages' render={()=><Dialogs dialogsPage={dialogsPage} />} />
-          <Route path='/profile' render={()=><Profile profilePage={profilePage} addPost={addPost} />} />
+          <Route 
+            path='/messages' 
+            render={()=><Dialogs dialogsPage={dialogsPage} />} />
+          <Route 
+            path='/profile' 
+            render={()=><Profile profilePage={profilePage} addPost={addPost} onPostChange={onPostChange} />} />
         </div>
       </div>
     </BrowserRouter>

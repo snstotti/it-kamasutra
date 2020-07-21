@@ -1,6 +1,5 @@
 import {rerenderTree} from '../render'
 
-
 let state = {
 
     dialogsPage: {
@@ -20,7 +19,7 @@ let state = {
     },
 
     profilePage: {
-
+        newPostText: '',
         myPostsData: [
             { id: 1, post: 'How are you frend', likeCount: 10 },
             { id: 2, post: 'i am fine', likeCount: 0 },
@@ -30,14 +29,17 @@ let state = {
     }
 }
 
-export let addPost = (postMessage) => {
-    
+export let onPostChange = (postMessage) => {
+    state.profilePage.newPostText=postMessage
+    rerenderTree(state)
+}
+
+export let addPost = () => {
     let post = {
-        id: 9, post: postMessage, likeCount: 0
+        id: 9, post: state.profilePage.newPostText, likeCount: 0
     }
-
     state.profilePage.myPostsData.push(post)
-
+    state.profilePage.newPostText=''
     rerenderTree(state)
 }
 

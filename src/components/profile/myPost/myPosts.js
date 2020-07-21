@@ -3,18 +3,24 @@ import s from './myPosts.module.css'
 import Post from './post/post'
 
 
-const MyPosts = ({myPostsData, addPost}) => {
+
+const MyPosts = ({ myPostsData, addPost, newPostText, onPostChange }) => {
 
     let myPostsElements = myPostsData
-    .map(el=>{
-        return <Post key={el.id} message={el.post} />
-    })
+        .map(el => {
+            return <Post key={el.id} message={el.post} />
+        })
 
     let addText = React.createRef()
+
     let addPostElement = () => {
+        addPost()
+    }
+
+    let updateChange = () => {
         let text = addText.current.value
-        addPost(text)
-        addText.current.value=''
+        onPostChange(text)
+        
     }
 
     return (
@@ -22,9 +28,13 @@ const MyPosts = ({myPostsData, addPost}) => {
             <div>
                 <h2>My posts</h2>
             </div>
-            
+
             <div className={s.myPosts__text}>
-                <textarea ref={addText} className={s.textarea} />
+                <textarea
+                    ref={addText}
+                    value={newPostText}
+                    className={s.textarea}
+                    onChange={updateChange} />
             </div>
 
             <div className={s.button}>
@@ -33,9 +43,9 @@ const MyPosts = ({myPostsData, addPost}) => {
                 </div>
             </div>
 
-            
-           {myPostsElements}
-            
+
+            {myPostsElements}
+
         </div>
     )
 }
