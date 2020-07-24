@@ -5,7 +5,7 @@ import ProfileInfo from './profileInfo/profileInfo'
 
 
 
-const Profile = ({profilePage , addPost, onPostChange}) => {
+const Profile = ({profilePage , dispatch}) => {
 
     const {myPostsData, newPostText} = profilePage
 
@@ -17,8 +17,7 @@ const Profile = ({profilePage , addPost, onPostChange}) => {
                 <MyPosts 
                     myPostsData={myPostsData} 
                     newPostText={newPostText} 
-                    addPost={addPost}
-                    onPostChange={onPostChange} />
+                    dispatch={dispatch} />
             </div>
         </div>
     )

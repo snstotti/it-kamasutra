@@ -16,7 +16,7 @@ const Dialogs = ({dialogsPage}) => {
 
 
     return (
-        <div className={s.dialogs}>
+        < className={s.dialogs}>
             <div className={s.dialogs__item}>
                 {dialogsElements}
             </div>
@@ -24,6 +24,11 @@ const Dialogs = ({dialogsPage}) => {
             <div className={s.messages}>
                 {messagesElements}
             </div>
+            <div>
+                <textarea  />
+                <button>Add message</button>
+            </div>
+            
         </div>
     )
 }

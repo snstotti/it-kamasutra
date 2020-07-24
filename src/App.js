@@ -5,10 +5,10 @@ import Header from './components/header/header';
 import NavBar from './components/navBar/navBar';
 import Dialogs from './components/dialogs/dialogs';
 import { Route, BrowserRouter } from 'react-router-dom'
-import { onPostChange } from './redux/state';
 
 
-function App({state, addPost}) {
+
+function App({state, dispatch}) {
   
   const {dialogsPage, profilePage} = state
 
@@ -23,7 +23,7 @@ function App({state, addPost}) {
             render={()=><Dialogs dialogsPage={dialogsPage} />} />
           <Route 
             path='/profile' 
-            render={()=><Profile profilePage={profilePage} addPost={addPost} onPostChange={onPostChange} />} />
+            render={()=><Profile profilePage={profilePage} dispatch={dispatch} />} />
         </div>
       </div>
     </BrowserRouter>

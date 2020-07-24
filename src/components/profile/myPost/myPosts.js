@@ -1,10 +1,10 @@
 import React from 'react'
 import s from './myPosts.module.css'
 import Post from './post/post'
+import { onPostChangeActionCreator, addPostActionCreator } from '../../../redux/state'
 
 
-
-const MyPosts = ({ myPostsData, addPost, newPostText, onPostChange }) => {
+const MyPosts = ({ myPostsData, newPostText, dispatch }) => {
 
     let myPostsElements = myPostsData
         .map(el => {
@@ -14,13 +14,14 @@ const MyPosts = ({ myPostsData, addPost, newPostText, onPostChange }) => {
     let addText = React.createRef()
 
     let addPostElement = () => {
-        addPost()
+        dispatch(addPostActionCreator())
     }
 
     let updateChange = () => {
+
         let text = addText.current.value
-        onPostChange(text)
-        
+
+        dispatch(onPostChangeActionCreator(text))
     }
 
     return (
