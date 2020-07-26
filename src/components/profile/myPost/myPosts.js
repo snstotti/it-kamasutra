@@ -21,9 +21,7 @@ const MyPosts = ({ addPost, state, updateChange }) => {
     }
 
     let onUpdateChange = () => {
-
         let text = addText.current.value
-
         updateChange(text)
     }
 

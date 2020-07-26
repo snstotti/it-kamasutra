@@ -2,28 +2,26 @@ import React from 'react'
 import s from './dialogs.module.css'
 import DialogsItem from './dialogsItem/dialogItem'
 import Message from './message/message'
-import {onMessageChangeCreator, sendMessageCreator} from '../../redux/dialogs-reduce'
 
 
-const Dialogs = ({store}) => {
 
-    let state = store.getState().dialogsPage
-    let dispatch = store.dispatch
+const Dialogs = ({state, newMessageChange, newSendMessage}) => {
 
     const { dialogs, messages, newMessageBody } = state
+
     let dialogsElements = dialogs
         .map(dialog => <DialogsItem key={dialog.id} name={dialog.name} id={dialog.id} />)
 
     let messagesElements = messages
         .map(message => <Message key={message.id} message={message.message} />)
 
-    let newMessageChange = (e) =>{
+    let oNnewMessageChange = (e) =>{
         let body = e.target.value
-        dispatch(onMessageChangeCreator(body))
+        newMessageChange(body)
     }
 
-    let newSendMessage =()=>{
-        dispatch(sendMessageCreator())
+    let oNnewSendMessage =()=>{
+        newSendMessage()
     }
 
     console.log(newMessageBody);
@@ -39,8 +37,8 @@ const Dialogs = ({store}) => {
                     <textarea 
                         placeholder='Enter your message'
                         value={newMessageBody}
-                        onChange={newMessageChange} />
-                    <button onClick={newSendMessage}>Add message</button>
+                        onChange={oNnewMessageChange} />
+                    <button onClick={oNnewSendMessage}>Add message</button>
                 </div>
             </div>
             <div className={s.dialogs__block}>
