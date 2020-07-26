@@ -2,17 +2,18 @@ import store from './redux/redux-store'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import MyContext from './contekst';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
 
-let rerenderTree = (state) => {
+let rerenderTree = () => {
+  debugger
   ReactDOM.render(
-    <React.StrictMode>
-      <MyContext.Provider value={store}>
+    <BrowserRouter>
+      <Provider store={store}>
         <App />
-      </MyContext.Provider>
-      
-    </React.StrictMode>,
+      </Provider>
+    </BrowserRouter>,
     document.getElementById('root')
   );
 }
@@ -20,7 +21,7 @@ let rerenderTree = (state) => {
 
 rerenderTree(store.getState())
 
-store.subscribe(()=>{
+store.subscribe(() => {
   rerenderTree(store.getState())
 })
 

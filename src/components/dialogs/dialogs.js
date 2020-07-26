@@ -5,9 +5,9 @@ import Message from './message/message'
 
 
 
-const Dialogs = ({state, newMessageChange, newSendMessage}) => {
-
-    const { dialogs, messages, newMessageBody } = state
+const Dialogs = ({dialogsPage, newMessageChange, newSendMessage}) => {
+    
+    const { dialogs, messages, newMessageBody } = dialogsPage
 
     let dialogsElements = dialogs
         .map(dialog => <DialogsItem key={dialog.id} name={dialog.name} id={dialog.id} />)

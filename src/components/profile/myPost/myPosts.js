@@ -4,10 +4,10 @@ import Post from './post/post'
 
 
 
-const MyPosts = ({ addPost, state, updateChange }) => {
+const MyPosts = ({ addPost, profilePage, updateChange }) => {
 
     
-    const { myPostsData, newPostText} = state
+    const { myPostsData, newPostText} = profilePage
 
     let myPostsElements = myPostsData
         .map(el => {

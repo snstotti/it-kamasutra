@@ -3,15 +3,14 @@ import './App.css';
 import Profile from './components/profile/profile';
 import Header from './components/header/header';
 import NavBar from './components/navBar/navBar';
-import { Route, BrowserRouter } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import DialogsContainer from './components/dialogs/dialogsContainer';
 
 
 
-function App({store}) {
-
+function App() {
+  debugger
   return (
-    <BrowserRouter>
       <div className='App'>
         <Header />
         <div className='contentBlock'>
@@ -24,7 +23,7 @@ function App({store}) {
             render={()=><Profile />} />
         </div>
       </div>
-    </BrowserRouter>
+    
 
   );
 }
