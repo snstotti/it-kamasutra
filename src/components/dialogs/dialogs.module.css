@@ -2,7 +2,13 @@
     width: 100%;
     background-color: darkcyan;
     display: flex;
+    text-align: left;
 }
+
+/* .dialogs__block{
+    display: flex;
+} */
+
 .dialogs__item {
     padding: 20px;
     color: #493641;

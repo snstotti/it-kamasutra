@@ -1,10 +1,13 @@
 import React from 'react'
 import s from './myPosts.module.css'
 import Post from './post/post'
-import { onPostChangeActionCreator, addPostActionCreator } from '../../../redux/state'
 
 
-const MyPosts = ({ myPostsData, newPostText, dispatch }) => {
+
+const MyPosts = ({ addPost, state, updateChange }) => {
+
+    
+    const { myPostsData, newPostText} = state
 
     let myPostsElements = myPostsData
         .map(el => {
@@ -13,15 +16,15 @@ const MyPosts = ({ myPostsData, newPostText, dispatch }) => {
 
     let addText = React.createRef()
 
-    let addPostElement = () => {
-        dispatch(addPostActionCreator())
+    let onAddPost = () => {
+        addPost()
     }
 
-    let updateChange = () => {
+    let onUpdateChange = () => {
 
         let text = addText.current.value
 
-        dispatch(onPostChangeActionCreator(text))
+        updateChange(text)
     }
 
     return (
@@ -35,12 +38,12 @@ const MyPosts = ({ myPostsData, newPostText, dispatch }) => {
                     ref={addText}
                     value={newPostText}
                     className={s.textarea}
-                    onChange={updateChange} />
+                    onChange={onUpdateChange} />
             </div>
 
             <div className={s.button}>
                 <div>
-                    <button onClick={addPostElement}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
 

@@ -8,9 +8,7 @@ import { Route, BrowserRouter } from 'react-router-dom'
 
 
 
-function App({state, dispatch}) {
-  
-  const {dialogsPage, profilePage} = state
+function App({store}) {
 
   return (
     <BrowserRouter>
@@ -20,10 +18,10 @@ function App({state, dispatch}) {
           <NavBar />
           <Route 
             path='/messages' 
-            render={()=><Dialogs dialogsPage={dialogsPage} />} />
+            render={()=><Dialogs store={store} />} />
           <Route 
             path='/profile' 
-            render={()=><Profile profilePage={profilePage} dispatch={dispatch} />} />
+            render={()=><Profile store={store} />} />
         </div>
       </div>
     </BrowserRouter>
