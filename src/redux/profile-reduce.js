@@ -15,18 +15,22 @@ const profileReduce =(state = initialState, action)=>{
 
     switch(action.type) {
 
-        case ADD_POST:
+        case ADD_POST:{
             let post = {
                 id: 9, post: state.newPostText, likeCount: 0
             }
-            state.myPostsData.push(post)
-            state.newPostText = ''
-            return state
-
-        case ON_POST_CHANGE:
-            state.newPostText = action.postMessage
-            return state
-
+            return {
+                ...state,
+                myPostsData: [...state.myPostsData, post],
+                newPostText: ''
+            }
+        }
+        case ON_POST_CHANGE:{
+            return {
+                ...state,
+                newPostText: action.postMessage
+            }
+        }
         default:
             return state
     }

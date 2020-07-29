@@ -6,24 +6,17 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 
-let rerenderTree = () => {
-  debugger
-  ReactDOM.render(
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>,
-    document.getElementById('root')
-  );
-}
 
 
-rerenderTree(store.getState())
+ReactDOM.render(
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>,
+  document.getElementById('root')
+);
 
-store.subscribe(() => {
-  rerenderTree(store.getState())
-})
 
 if (module.hot) {
   module.hot.accept()
