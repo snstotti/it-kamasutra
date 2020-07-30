@@ -23,7 +23,7 @@ const dialogsReduce =(state = initialState, action)=>{
 
     switch(action.type) {
 
-        case SEND_MESSAGE:{
+        case SEND_MESSAGE:
             let body = {
                 id: 7, message: state.newMessageBody
             }
@@ -32,13 +32,13 @@ const dialogsReduce =(state = initialState, action)=>{
                 messages: [...state.messages, body],
                 newMessageBody: ''
             }
-        }
-        case UPDATE_NEW_MESSAGE_BODY: {
+        
+        case UPDATE_NEW_MESSAGE_BODY: 
             return {
                 ...state,
                 newMessageBody: action.body
             }            
-        }
+        
         default:
             return state
     }
