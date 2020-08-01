@@ -1,23 +1,29 @@
-import React, { Component } from 'react'
+import React from 'react'
 import s from './users.module.css'
-import * as axios from 'axios'
 
-class Users extends Component {
+const Users = ({ usersPage, followeds, unFolloweds, totalUserCount, pageSize, currentPage, onSetCurentPage }) => {
 
-    componentWillMount(){
-        axios
-        .get('https://social-network.samuraijs.com/api/1.0/users')
-        .then(response => {
-            debugger
-            return this.props.showUsers(response.data.items)
-        })
+    let pageNumber = Math.ceil(totalUserCount / pageSize)
+
+    let arrPagination = []
+
+    for (let i = 1; i <= pageNumber; i++) {
+        arrPagination.push(i)
     }
 
-render() {
-    const {usersPage, followeds, unFolloweds} = this.props
     let avatar = 'https://storage.googleapis.com/multi-static-content/previews/artage-io-thumb-fa0f3975e34b8449bad064b22bc5a77f.png'
 
+    let pagination = arrPagination.map(p => {
+        return (
+            <span
+                key={p}
+                className={currentPage === p ? s.selectedAction : s.selected}
+                onClick={() => onSetCurentPage(p)} >{p}</span>
+        )
+    })
+
     let userShow = usersPage.map(user => {
+
         return (
             <div key={user.id} className={s.userSection}>
 
@@ -27,8 +33,8 @@ render() {
                     </div>
                     <div>
                         <button onClick={user.followed
-                            ? () => followeds(user.id)
-                            : () => unFolloweds(user.id)}>{user.followed ? 'Follow' : 'Unfollow'}</button>
+                            ? () => unFolloweds(user.id)
+                            : () => followeds(user.id)}>{user.followed ? 'Follow' : 'Unfollow'}</button>
                     </div>
                 </div>
 
@@ -49,11 +55,9 @@ render() {
 
     return (
         <div className={s.usersBlock}>
+            <div>{pagination}</div>
             {userShow}
         </div>
     )
 }
-    
-}
-
 export default Users

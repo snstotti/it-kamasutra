@@ -27,3 +27,15 @@
     flex-direction: column;
     margin: 0 10px;
 }
+.selectedAction {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 4px;
+    
+}
+.selected {
+    padding: 5px 10px;
+    cursor: pointer;
+    background: gainsboro;
+    margin: 0 2px;
+}

@@ -1,9 +1,14 @@
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const USER_SHOW = 'USER_SHOW'
+const CURRENT_PAGE = 'CURRENT_PAGE'
+const TOTAL_COUNT = 'TOTAL_COUNT'
 
 let initialState = {
-    users: [ ]
+    users: [ ],
+    totalUserCount: 54, // всего пользователей
+    pageSize: 5, // колличество пльзователей на страннице
+    currentPage: 7 // текущая страница
 }
 
 const usersReduce = (state = initialState, action) => {
@@ -20,6 +25,7 @@ const usersReduce = (state = initialState, action) => {
                     return u
                 })
             }
+
         case UNFOLLOW:
             return {
                 ...state,
@@ -33,7 +39,16 @@ const usersReduce = (state = initialState, action) => {
 
         case USER_SHOW:
             return {
-                ...state, users: [...state.users, ...action.users]
+                ...state, users: action.users
+            }
+
+        case CURRENT_PAGE:
+            return {
+                ...state, currentPage: action.currentPage
+            }
+        case TOTAL_COUNT:
+            return {
+                ...state, totalUserCount: action.num
             }
 
         default:
@@ -44,6 +59,9 @@ const usersReduce = (state = initialState, action) => {
 export const followedAC = userId => ({ type: FOLLOW, userId })
 export const unFollowedAC = userId => ({ type: UNFOLLOW, userId })
 export const usersShowAC = users => ({ type: USER_SHOW, users })
+export const currentPageAC = currentPage => ({ type: CURRENT_PAGE, currentPage })
+export const totalCountAC = num => ({ type: TOTAL_COUNT, num })
+
 
 
 
