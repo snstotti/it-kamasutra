@@ -1,37 +1,45 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { followedAC, unFollowedAC, usersShowAC, currentPageAC, totalCountAC } from '../../redux/users-reduce'
+import { followeds, unFolloweds, showUsers, setCurentPage, setTotalCount, toggleIsloader } from '../../redux/users-reduce'
 import Users from './users'
 import * as axios from 'axios'
+import Preloader from '../common/preloaders/preloader'
 
 
 class UsersApiComponent extends Component {
 
     componentDidMount() {
-        const { currentPage, pageSize, showUsers } = this.props
+        const { currentPage, pageSize, showUsers, toggleIsloader } = this.props
+        toggleIsloader(false)
         axios
             .get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`)
             .then(response => {
                 showUsers(response.data.items)
                 // this.props.setTotalCount(response.data.totalCount)
+                toggleIsloader(true)
             })
+
     }
 
 
     onSetCurentPage = (pageNumber) => {
-        const { setCurentPage, pageSize, showUsers } = this.props
+        const { setCurentPage, pageSize, showUsers, toggleIsloader } = this.props
+        toggleIsloader(false)
         setCurentPage(pageNumber)
         axios
             .get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${pageSize}`)
             .then(response => {
                 showUsers(response.data.items)
+                toggleIsloader(true)
             })
+
     }
 
 
     render() {
-        const { usersPage, followeds, unFolloweds, totalUserCount, pageSize, currentPage } = this.props
-        return <Users
+        const { usersPage, followeds, unFolloweds, totalUserCount, pageSize, currentPage, isLoader } = this.props
+
+        let user = <Users
             usersPage={usersPage}
             followeds={followeds}
             unFolloweds={unFolloweds}
@@ -39,6 +47,15 @@ class UsersApiComponent extends Component {
             pageSize={pageSize}
             currentPage={currentPage}
             onSetCurentPage={this.onSetCurentPage} />
+
+        return <>
+            {isLoader ? user : <Preloader />}
+
+        </>
+
+
+
+
 
     }
 }
@@ -50,29 +67,17 @@ let mapStateToProps = (state) => {
         totalUserCount: state.usersPage.totalUserCount,
         pageSize: state.usersPage.pageSize,
         currentPage: state.usersPage.currentPage,
+        isLoader: state.usersPage.isLoader
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        followeds: (userId) => {
-            dispatch(followedAC(userId))
-        },
-        unFolloweds: (userId) => {
-            dispatch(unFollowedAC(userId))
-        },
-        showUsers: (users) => {
-            dispatch(usersShowAC(users))
-        },
-        setCurentPage: (curentPage) => {
-            dispatch(currentPageAC(curentPage))
-        },
-        setTotalCount: (num) => {
-            dispatch(totalCountAC(num))
-        }
-    }
-}
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersApiComponent)
+
+
+
+
+
+const UsersContainer = 
+connect( mapStateToProps, {followeds,unFolloweds,showUsers,setCurentPage,setTotalCount,toggleIsloader} )(UsersApiComponent)
 
 export default UsersContainer

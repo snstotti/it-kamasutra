@@ -1,6 +1,7 @@
 import React from 'react'
 import s from './users.module.css'
 
+
 const Users = ({ usersPage, followeds, unFolloweds, totalUserCount, pageSize, currentPage, onSetCurentPage }) => {
 
     let pageNumber = Math.ceil(totalUserCount / pageSize)
