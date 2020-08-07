@@ -12,22 +12,20 @@ class UsersApiComponent extends Component {
         const { currentPage, pageSize, showUsers, toggleIsloader } = this.props
         toggleIsloader(false)
         axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`)
+            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`,{withCredentials: true})
             .then(response => {
                 showUsers(response.data.items)
                 // this.props.setTotalCount(response.data.totalCount)
                 toggleIsloader(true)
             })
-
     }
-
 
     onSetCurentPage = (pageNumber) => {
         const { setCurentPage, pageSize, showUsers, toggleIsloader } = this.props
         toggleIsloader(false)
         setCurentPage(pageNumber)
         axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${pageSize}`)
+            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${pageSize}`,{withCredentials: true})
             .then(response => {
                 showUsers(response.data.items)
                 toggleIsloader(true)
@@ -53,10 +51,6 @@ class UsersApiComponent extends Component {
 
         </>
 
-
-
-
-
     }
 }
 
@@ -70,12 +64,6 @@ let mapStateToProps = (state) => {
         isLoader: state.usersPage.isLoader
     }
 }
-
-
-
-
-
-
 
 const UsersContainer = 
 connect( mapStateToProps, {followeds,unFolloweds,showUsers,setCurentPage,setTotalCount,toggleIsloader} )(UsersApiComponent)

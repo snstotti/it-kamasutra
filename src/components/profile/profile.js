@@ -6,13 +6,11 @@ import MyPostsContainer from './myPost/myPostsContainer'
 
 
 
-const Profile = ({store}) => {
-
-    
+const Profile = ({profile}) => {
 
     return (
         <div className={s.content}>
-            <ProfileInfo name='Nikola' />
+            <ProfileInfo name='Nikola' profile={profile}  />
 
             <div className={s.myPosts}>
                 <MyPostsContainer />

@@ -3,6 +3,8 @@
     background-color: #05AB60;
     margin: 10px;
     text-align: left;
+    display: flex;
+    justify-content: space-between;
 }
 
 .icon {

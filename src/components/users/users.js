@@ -1,5 +1,7 @@
 import React from 'react'
 import s from './users.module.css'
+import Axios from 'axios'
+import { NavLink } from 'react-router-dom'
 
 
 const Users = ({ usersPage, followeds, unFolloweds, totalUserCount, pageSize, currentPage, onSetCurentPage }) => {
@@ -30,12 +32,31 @@ const Users = ({ usersPage, followeds, unFolloweds, totalUserCount, pageSize, cu
 
                 <div className={s.avatarBlock}>
                     <div>
-                        <img src={user.photos.small || avatar} className={s.avatarUser} alt='' />
+                        <NavLink to={'/profile/' + user.id} >
+                            <img src={user.photos.small || avatar} className={s.avatarUser} alt='' />
+                        </NavLink>
+                        
                     </div>
                     <div>
                         <button onClick={user.followed
-                            ? () => unFolloweds(user.id)
-                            : () => followeds(user.id)}>{user.followed ? 'Follow' : 'Unfollow'}</button>
+                            ? () => {
+                                Axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {withCredentials: true,
+                                headers:{'API_KEY': '2ed742ce-2034-4d99-84b4-7c09b798fd53'}})
+                                .then(response =>{
+                                    if(response.data.resultCode === 0){
+                                        followeds(user.id)
+                                    }
+                                })
+                            }
+                            : () => {
+                                Axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,{withCredentials: true,
+                                headers:{'API_KEY': '2ed742ce-2034-4d99-84b4-7c09b798fd53'}})
+                                .then(response =>{
+                                    if(response.data.resultCode === 0){
+                                        unFolloweds(user.id)
+                                    }
+                                })
+                            }}>{user.followed ? 'Follow' : 'Unfollow'}</button>
                     </div>
                 </div>
 
