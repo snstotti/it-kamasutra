@@ -1,3 +1,5 @@
+import { authAPI } from "../components/API/api"
+
 const SET_USER_DATA = 'SET_USER_DATA'
 
 
@@ -28,5 +30,22 @@ const authReduce =(state = initialState, action)=>{
 }
 
 export const setUserData = (login, email, userId) => ({ type: SET_USER_DATA, data:{login, email, userId} })
+
+export const getAuth = () => {
+    
+    return (dispatch) => {
+        
+        authAPI.me()
+            .then(response => {
+                
+                if (response.data.resultCode === 0) {
+                    const { login, email, id } = response.data.data
+                    dispatch(setUserData(login, email, id))
+                }
+
+            })
+
+    }
+}
 
 export default authReduce

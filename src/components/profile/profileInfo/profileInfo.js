@@ -9,6 +9,9 @@ const ProfileInfo = ({name,profile}) => {
       return <Preloader />
     }
     
+    let anonim = 'https://fetside.com/images/no-image/anonymous.svg'
+    let avatarUser = profile.photos.large
+    const {facebook, website, vk, twitter, instagram, youtube, github, mainLink} = profile.contacts
     return (
         <Fragment>
             <div>
@@ -17,13 +20,34 @@ const ProfileInfo = ({name,profile}) => {
 
             <div className={s.profile}>
                 <div className={s.avatar}>
-                    <img className={s.avatar__image} src={profile.photos.large} alt='' />
+                    <img className={s.avatar__image} src={avatarUser || anonim} alt='' />
                 </div>
                 <div className={s.profile__description}>
                     <div>
-                    <h2 className={s.profile__name}>{name}</h2>
+                    <h2 className={s.profile__name}>{profile.fullName}</h2>
                         <div>
-                            Description
+                            {profile.aboutMe}
+                        </div>
+                        <div>
+                            <span>
+                               Работа: {profile.lookingForAJob ? 'В поиске работы' : 'Работаю в IT' }
+                            </span>
+                        </div>
+                        <div>
+                            <span>
+                                О себе: {profile.lookingForAJobDescription}
+                            </span>
+                        </div>
+                        <div>
+                            Мои контакты:
+                            <p> Facebook: {facebook || null}</p>
+                            <p> website: {website || 'нет'}</p>
+                            <p> vk: {vk || 'нет'}</p>
+                            <p> twitter: {twitter || 'нет'}</p>
+                            <p> instagram: {instagram || 'нет'}</p>
+                            <p> youtube: {youtube || 'нет'}</p>
+                            <p> github: {github || 'нет'}</p>
+                            <p> mainLink: {mainLink || 'нет'}</p>
                         </div>
                     </div>
                 </div>
