@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 
 import { userProfile } from '../../redux/profile-reduce'
 import { withRouter } from 'react-router-dom'
+import WithAuthReirect from '../HOC/withAuthRedirect'
+import { compose } from 'redux'
 
 
 
@@ -31,6 +33,9 @@ let mapStateToProps =(state)=>{
     }
 }
 
-let WithUriComponentConteiner = withRouter(ProfileContainer)
+export default compose(
+    connect(mapStateToProps, { userProfile }),
+    withRouter,
+    WithAuthReirect
+)(ProfileContainer)
 
-export default connect(mapStateToProps, { userProfile })(WithUriComponentConteiner)

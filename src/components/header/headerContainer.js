@@ -4,6 +4,7 @@ import Header from './header'
 import {getAuth } from '../../redux/auth-reduce'
 
 
+
 class HeaderContainer extends Component {
 
     componentDidMount() {
@@ -25,8 +26,9 @@ class HeaderContainer extends Component {
 let mapStateToProps = (state) => {
     return {
         login: state.auth.login,
-        isAuth: state.auth.isAuth
     }
 }
+
+
 
 export default connect(mapStateToProps,{getAuth})(HeaderContainer)

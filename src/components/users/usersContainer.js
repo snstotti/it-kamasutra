@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { follow, unfollow, toggleIsDisable, getUser } from '../../redux/users-reduce'
 import Users from './users'
 import Preloader from '../common/preloaders/preloader'
+import { compose } from 'redux'
+import WithAuthReirect from '../HOC/withAuthRedirect'
 
 
 
@@ -53,7 +55,9 @@ let mapStateToProps = (state) => {
     }
 }
 
-const UsersContainer = 
-connect( mapStateToProps, {follow,unfollow, toggleIsDisable, getUser} )(UsersApiComponent)
 
-export default UsersContainer
+
+export default compose(
+    connect( mapStateToProps, {follow,unfollow, toggleIsDisable, getUser} ),
+    WithAuthReirect
+)(UsersApiComponent)

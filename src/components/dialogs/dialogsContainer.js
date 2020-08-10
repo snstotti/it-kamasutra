@@ -2,6 +2,8 @@
 import { onMessageChangeCreator, sendMessageCreator } from '../../redux/dialogs-reduce'
 import Dialogs from './dialogs'
 import {connect} from 'react-redux'
+import WithAuthReirect from '../HOC/withAuthRedirect'
+import { compose } from 'redux'
 
 
 let mapStateToProps =(state)=>{
@@ -22,6 +24,7 @@ let mapDispatchToProps=(dispatch)=>{
     }
 }
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
-
-export default DialogsContainer
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    WithAuthReirect
+)(Dialogs)
