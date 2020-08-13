@@ -4,7 +4,7 @@ import { follow, unfollow, toggleIsDisable, getUser } from '../../redux/users-re
 import Users from './users'
 import Preloader from '../common/preloaders/preloader'
 import { compose } from 'redux'
-import WithAuthReirect from '../HOC/withAuthRedirect'
+
 
 
 
@@ -57,5 +57,5 @@ let mapStateToProps = (state) => {
 
 export default compose(
     connect( mapStateToProps, {follow,unfollow, toggleIsDisable, getUser} ),
-    WithAuthReirect
+    
 )(UsersApiComponent)
