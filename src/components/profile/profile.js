@@ -8,7 +8,7 @@ import MyPostsContainer from './myPost/myPostsContainer'
 
 
 const Profile = ({profile, isAuth, getUpdateStatus, status}) => {
-    console.log(status);
+    
     return (
         <div className={s.content}>
             <ProfileInfo name='Nikola' profile={profile} getUpdateStatus={getUpdateStatus} status={status} />
