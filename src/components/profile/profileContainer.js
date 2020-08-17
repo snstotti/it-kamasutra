@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { userProfile, getUserStatus, getUpdateStatus } from '../../redux/profile-reduce'
 import { withRouter } from 'react-router-dom'
-import WithAuthReirect from '../HOC/withAuthRedirect'
+// import WithAuthReirect from '../HOC/withAuthRedirect'
 import { compose } from 'redux'
 
 

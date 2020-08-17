@@ -5,6 +5,7 @@ import sidebarReduce from './sitebar-reduce'
 import usersReduce from './users-reduce'
 import authReduce from './auth-reduce'
 import thunkMiddleware from 'redux-thunk'
+import { reducer as formReducer } from 'redux-form'
 
 
 let reducer = combineReducers({
@@ -12,7 +13,8 @@ let reducer = combineReducers({
     dialogsPage: dialogsReduce,
     sidebarPage: sidebarReduce,
     usersPage: usersReduce,
-    auth: authReduce
+    auth: authReduce,
+    form: formReducer
 })
 
 let store = createStore(reducer, applyMiddleware(thunkMiddleware))

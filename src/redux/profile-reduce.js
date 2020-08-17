@@ -6,7 +6,7 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_USER_STATUS = 'SET_USER_STATUS'
 
 let initialState = {
-    newPostText: '',
+    
     myPostsData: [
         { id: 1, post: 'How are you frend', likeCount: 10 },
         { id: 2, post: 'i am fine', likeCount: 0 },
@@ -23,7 +23,7 @@ const profileReduce = (state = initialState, action) => {
 
         case ADD_POST: {
             let post = {
-                id: 9, post: state.newPostText, likeCount: 0
+                id: 9, post: action.post, likeCount: 0
             }
             return {
                 ...state,
@@ -52,7 +52,7 @@ const profileReduce = (state = initialState, action) => {
     }
 }
 
-export const addPostActionCreator = () => ({ type: ADD_POST })
+export const addPost = (post) => ({ type: ADD_POST, post })
 export const onPostChangeActionCreator = text => ({ type: ON_POST_CHANGE, postMessage: text })
 export const setUserProfile = profile => ({ type: SET_USER_PROFILE, profile })
 export const setUserStatus = status => ({ type: SET_USER_STATUS, status })
