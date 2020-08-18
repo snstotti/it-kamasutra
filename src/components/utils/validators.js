@@ -1,11 +1,11 @@
 // import React from 'react'
 
 export const required = value =>{
-    if(value) return undefined;
+    if(value) return undefined ;
     return 'Field is required'
 }
 
 export const maxLengthCreator = max => value => {
-    return value && value.length > max ? `Must be ${max} characters or more`: undefined
+    return value.length > max ? `Must be ${max} characters or more`: undefined
 }
 

@@ -1,13 +1,22 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { required, maxLengthCreator } from '../common/utils/validators'
-import { CostomForm } from '../common/utils/formControl'
+import { login, logout } from '../../redux/auth-reduce'
+import { CostomForm } from '../common/formControl/formControl'
 import s from './Login.module.css'
+import { required, maxLengthCreator } from '../utils/validators'
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-const Login = ()=>{
-    const onSubmit = (values ) =>{
-        console.log(values )
+const Login = ({login, isAuth})=>{
+   
+    const onSubmit = (formData ) =>{
+        const {email, password, checkbox} = formData
+        login(email, password, checkbox)
+
+        console.log(formData )
     }
+
+    if(isAuth) return <Redirect to='/profile' />
     return(
         <div>
             <h1>Login</h1>
@@ -16,20 +25,33 @@ const Login = ()=>{
        
     )
 }
-const maxLength10 = maxLengthCreator(10)
+const maxLength50 = maxLengthCreator(50)
+const costomLogin = CostomForm('input')
+const costomPassword = CostomForm('password')
+const costomCheckbox = CostomForm('Checkbox')
 
 const LoginForm = ({handleSubmit})=>{
    
     return(
         <form onSubmit={handleSubmit} className={s.formLogin}>
             <div>
-                <Field placeholder='Login' validate={[required, maxLength10]} component={CostomForm('input')} name='login' />
+                <Field 
+                    placeholder='Login' 
+                    validate={[required, maxLength50]} 
+                    component={costomLogin} 
+                    name='email' />
             </div>
             <div>
-                <Field placeholder='Password' validate={[required, maxLength10]} component={CostomForm('input')} name='password' />
+                <Field 
+                    placeholder='Password' 
+                    validate={[required, maxLength50]} 
+                    component={costomPassword} 
+                    name='password' />
             </div>
             <div className={s.checkbox}>
-                <Field component={CostomForm('checkbox')} name='checkbox'/> remember me
+                <Field 
+                    component={costomCheckbox} 
+                    name='checkbox'/> remember me
             </div>
             <div>
                 <button>Login</button>
@@ -40,4 +62,10 @@ const LoginForm = ({handleSubmit})=>{
 
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
-export default Login
+const mapStateToProps =(state)=>{
+    return{
+        isAuth: state.auth.isAuth
+    }
+}
+
+export default connect( mapStateToProps, {login, logout})(Login) 
