@@ -1,19 +1,18 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { login, logout } from '../../redux/auth-reduce'
+import { logined, logout } from '../../redux/auth-reduce'
 import { CostomForm } from '../common/formControl/formControl'
 import s from './Login.module.css'
 import { required, maxLengthCreator } from '../utils/validators'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-const Login = ({login, isAuth})=>{
+const Login = ({logined, isAuth})=>{
    
     const onSubmit = (formData ) =>{
-        const {email, password, checkbox} = formData
-        login(email, password, checkbox)
-
-        console.log(formData )
+        const {email, password, rememberMe} = formData
+        logined(email, password, rememberMe)
+        console.log(formData);
     }
 
     if(isAuth) return <Redirect to='/profile' />
@@ -30,7 +29,7 @@ const costomLogin = CostomForm('input')
 const costomPassword = CostomForm('password')
 const costomCheckbox = CostomForm('Checkbox')
 
-const LoginForm = ({handleSubmit})=>{
+const LoginForm = ({handleSubmit, error})=>{
    
     return(
         <form onSubmit={handleSubmit} className={s.formLogin}>
@@ -53,6 +52,9 @@ const LoginForm = ({handleSubmit})=>{
                     component={costomCheckbox} 
                     name='checkbox'/> remember me
             </div>
+            {error && <div className={s.errorForm}>
+                <span>{error}</span>
+            </div>}
             <div>
                 <button>Login</button>
             </div>
@@ -68,4 +70,4 @@ const mapStateToProps =(state)=>{
     }
 }
 
-export default connect( mapStateToProps, {login, logout})(Login) 
+export default connect( mapStateToProps, {logined, logout})(Login) 

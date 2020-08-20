@@ -15,7 +15,7 @@ class ProfileContainer extends Component {
         let userId = this.props.match.params.userId
 
         if(!userId) {
-            userId = 9740
+            userId = this.props.userId
 
         }
 
@@ -33,7 +33,8 @@ class ProfileContainer extends Component {
 let mapStateToProps =(state)=>{
     return{
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        userId: state.auth.userId
     }
 }
 

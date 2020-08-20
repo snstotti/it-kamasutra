@@ -4,3 +4,10 @@
 .checkbox{
     display: flex;
 }
+.errorForm {
+    margin: 5px 0;
+    border: 1px solid red;
+    display: inline-block;
+    color:red;
+    padding: 5px;
+}
