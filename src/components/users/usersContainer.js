@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { follow, unfollow, toggleIsDisable, getUser } from '../../redux/users-reduce'
+import { follow, unfollow, toggleIsDisable, requestUser } from '../../redux/users-reduce'
 import Users from './users'
 import Preloader from '../common/preloaders/preloader'
 import { compose } from 'redux'
+import { getUsers, getTotalUserCount, getPageSize, getCurrentPage, getIsLoader, getIsDisable } from '../../redux/users-selector'
 
 
 
@@ -12,13 +13,13 @@ class UsersApiComponent extends Component {
 
 
     componentDidMount() {
-        const { currentPage, pageSize,  getUser } = this.props
-        getUser(currentPage, pageSize)
+        const { currentPage, pageSize,  requestUser } = this.props
+        requestUser(currentPage, pageSize)
     }
 
     onSetCurentPage = (pageNumber) => {
-        const {  pageSize, getUser } = this.props
-        getUser(pageNumber, pageSize)
+        const {  pageSize, requestUser } = this.props
+        requestUser(pageNumber, pageSize)
     }
 
 
@@ -46,16 +47,16 @@ class UsersApiComponent extends Component {
 let mapStateToProps = (state) => {
 
     return {
-        usersPage: state.usersPage.users,
-        totalUserCount: state.usersPage.totalUserCount,
-        pageSize: state.usersPage.pageSize,
-        currentPage: state.usersPage.currentPage,
-        isLoader: state.usersPage.isLoader,
-        isDisable: state.usersPage.isDisable
+        usersPage: getUsers(state),
+        totalUserCount: getTotalUserCount(state),
+        pageSize: getPageSize(state),
+        currentPage: getCurrentPage(state),
+        isLoader: getIsLoader(state),
+        isDisable: getIsDisable(state)
     }
 }
 
 export default compose(
-    connect( mapStateToProps, {follow,unfollow, toggleIsDisable, getUser} ),
+    connect( mapStateToProps, {follow,unfollow, toggleIsDisable, requestUser} ),
     
 )(UsersApiComponent)

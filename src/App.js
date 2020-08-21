@@ -8,14 +8,14 @@ import ProfileContainer from './components/profile/profileContainer';
 import HeaderContainer from './components/header/headerContainer';
 import Login from './components/Login/Login';
 import { compose } from 'redux';
-import {initializedSuccess} from './redux/app-reduce'
+import {initialize} from './redux/app-reduce'
 import { connect } from 'react-redux'
 import Preloader from './components/common/preloaders/preloader';
 
 class App extends Component{
 
   componentDidMount() {
-    this.props.initializedSuccess()
+    this.props.initialize()
   }
 
   render() {
@@ -57,6 +57,6 @@ const mapStateToProps = (state)=>{
 
 export default compose(
   withRouter,
-  connect(mapStateToProps, {initializedSuccess})
+  connect(mapStateToProps, {initialize})
   
 )(App)

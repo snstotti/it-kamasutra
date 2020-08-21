@@ -82,7 +82,7 @@ export const setTotalCount = num => ({ type: TOTAL_COUNT, num })
 export const toggleIsloader = load => ({ type: TOGGLE_IS_LOADER, load })
 export const toggleIsDisable =(isLoader, userId) =>({ type: TOGGLE_IS_DISABLE, isLoader, userId})
 
-export const getUser = (current, pageSize) => {
+export const requestUser = (current, pageSize) => {
 
     return (dispatch) => {
 
