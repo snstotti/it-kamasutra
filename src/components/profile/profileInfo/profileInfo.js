@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import imgHead from './Cosmos.png'
 import s from './profileInfo.module.css'
 import Preloader from '../../common/preloaders/preloader'
-import ProfileStatus from '../profileStatus/profileStatus'
+import ProfileStatusSuper from '../profileStatus/profileStatusSuper'
 
 const ProfileInfo = ({name,profile, status, getUpdateStatus}) => {
     // let myAva = 'https://cdn-nus-1.pinme.ru/photo/3d/d5/3dd5a78d8165ca95e6c0425aad7e3d38.jpg'
@@ -24,7 +24,7 @@ const ProfileInfo = ({name,profile, status, getUpdateStatus}) => {
                     <img className={s.avatar__image} src={avatarUser || anonim} alt='' />
                 </div>
                 <div>
-                    <ProfileStatus status={status} getUpdateStatus={getUpdateStatus} />
+                    <ProfileStatusSuper status={status} getUpdateStatus={getUpdateStatus} />
                 </div>
                 <div className={s.profile__description}>
                     <div>
