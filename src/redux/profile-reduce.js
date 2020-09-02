@@ -5,6 +5,7 @@ const DELETE_POST = 'DELETE_POST'
 const ON_POST_CHANGE = 'ON-POST-CHANGE'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_USER_STATUS = 'SET_USER_STATUS'
+const SET_USER_AVATAR = 'SET_USER_AVATAR'
 
 let initialState = {
     
@@ -55,12 +56,19 @@ const profileReduce = (state = initialState, action) => {
                 ...state, status: action.status
             }
         }
+        case SET_USER_AVATAR: {
+            
+            return {
+                ...state, profile: {...state.profile, photos: action.photos}
+            }
+        }
         default:
             return state
     }
 }
 
 export const addPost = post => ({ type: ADD_POST, post })
+export const setUserAvatar = photos => ({ type: SET_USER_AVATAR, photos })
 export const deletePost = postId => ({ type: DELETE_POST, postId })
 export const onPostChangeActionCreator = text => ({ type: ON_POST_CHANGE, postMessage: text })
 export const setUserProfile = profile => ({ type: SET_USER_PROFILE, profile })
@@ -82,14 +90,28 @@ export const getUserStatus = (userId) => {
     }
 } // получение статуса с АПИ и установка в state
 
-export const getUpdateStatus = (status) => {
+export const getUpdateStatus = (status) => async (dispatch) => {
+
+   let response = await profileAPI.updateStatus(status);
+
+    if (response.data.resultCode === 0) {
+        dispatch(setUserStatus(status))
+    }
+}
+
+export const saveAvatar = (file) => {
+    
     return (dispatch) => {
-        profileAPI.updateStatus(status).then(response => {
+        
+        profileAPI.updateAvatar(file)
+            .then(response => {
+                
             if (response.data.resultCode === 0) {
-                dispatch(setUserStatus(status))
+                dispatch(setUserAvatar(response.data.data.photos))
             }
         })
     }
 } // обновление статуса
+
 
 export default profileReduce

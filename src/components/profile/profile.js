@@ -7,11 +7,11 @@ import MyPostsContainer from './myPost/myPostsContainer'
 
 
 
-const Profile = ({profile, isAuth, getUpdateStatus, status}) => {
+const Profile = ({profile,  getUpdateStatus, status, owner, saveAvatar}) => {
     
     return (
         <div className={s.content}>
-            <ProfileInfo name='Nikola' profile={profile} getUpdateStatus={getUpdateStatus} status={status} />
+            <ProfileInfo name='Nikola' owner={owner} saveAvatar={saveAvatar} profile={profile} getUpdateStatus={getUpdateStatus} status={status} />
 
             <div className={s.myPosts}>
                 <MyPostsContainer />

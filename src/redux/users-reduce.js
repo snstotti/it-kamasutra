@@ -11,13 +11,13 @@ const TOGGLE_IS_DISABLE = 'TOGGLE_IS_DISABLE'
 
 let initialState = {
     users: [ ],
-    totalUserCount: 54, // всего пользователей
-    pageSize: 5, // колличество пльзователей на страннице
+    totalUserCount: 50, // всего пользователей
+    pageSize: 10, // колличество пльзователей на страннице
     currentPage: 1, // текущая страница
     isLoader: true,
     isDisable: []
 }
-
+ 
 const usersReduce = (state = initialState, action) => {
 
     switch (action.type) {
@@ -91,8 +91,9 @@ export const requestUser = (current, pageSize) => {
             usersAPI.getUsers(current, pageSize)
             .then(data => {
                 dispatch(showUsers(data.items))
+               
+                dispatch(setTotalCount(data.totalCount))
                 dispatch(toggleIsloader(true))
-                // this.props.setTotalCount(response.data.totalCount)
             })
     } 
 }

@@ -1,33 +1,21 @@
 import React from 'react'
 import s from './users.module.css'
 import { NavLink } from 'react-router-dom'
+import Paginator from '../common/paginator/paginator'
+import Preloader from '../common/preloaders/preloader'
 
 
-const Users = ({ usersPage,  totalUserCount, pageSize, currentPage, onSetCurentPage, isDisable, follow, unfollow }) => {
+// 
 
-    let pageNumber = Math.ceil(totalUserCount / pageSize)
+const Users = ({ usersPage,  totalUserCount, pageSize, currentPage, onSetCurentPage, isDisable, isLoader, follow, unfollow }) => {
 
-    let arrPagination = []
-
-    for (let i = 1; i <= pageNumber; i++) {
-        arrPagination.push(i)
-    }
-
-
-
+   let pagination = <Paginator  pageSize={pageSize} totalUserCount={totalUserCount} currentPage={currentPage} onSetCurentPage={onSetCurentPage} />
+    
     let avatar = 'https://storage.googleapis.com/multi-static-content/previews/artage-io-thumb-fa0f3975e34b8449bad064b22bc5a77f.png'
 
-    let pagination = arrPagination.map(p => {
-      
-        return (
-            <span
-                key={p}
-                className={currentPage === p ? s.selectedAction : s.selected}
-                onClick={() => onSetCurentPage(p)} >{p}</span>
-        )
-    })
-
     let userShow = usersPage.map(user => {
+
+        
 
         return (
             <div key={user.id} className={s.userSection}>
@@ -65,7 +53,8 @@ const Users = ({ usersPage,  totalUserCount, pageSize, currentPage, onSetCurentP
 
     return (
         <div className={s.usersBlock}>
-            <div>{pagination}</div>
+            <div className={s.usersBlockContent}>{!isLoader ? <Preloader size={30} /> : null} {pagination}</div>
+            
             {userShow}
         </div>
     )

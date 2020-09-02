@@ -1,3 +1,9 @@
+.avatar {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 20px;
+}
 .content__image{
     height: 140px;
     width: 100%;
@@ -12,12 +18,10 @@
 
 .profile {
     display: flex;
+    
 }
 
 .profile__name {
     margin: 10px 0;
 }
 
-.profile__description {
-    padding-left: 20px;
-}

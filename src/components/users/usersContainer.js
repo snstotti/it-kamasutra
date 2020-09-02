@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { follow, unfollow, toggleIsDisable, requestUser } from '../../redux/users-reduce'
 import Users from './users'
-import Preloader from '../common/preloaders/preloader'
+
 import { compose } from 'redux'
 import { getUsers, getTotalUserCount, getPageSize, getCurrentPage, getIsLoader, getIsDisable } from '../../redux/users-selector'
 
@@ -26,7 +26,11 @@ class UsersApiComponent extends Component {
     render() {
         const { usersPage, follow,unfollow, totalUserCount, pageSize, currentPage, isLoader,  isDisable } = this.props
 
-        let user = <Users
+       
+        
+        return <>
+            
+            <Users
             usersPage={usersPage}
             follow={follow}
             unfollow={unfollow}
@@ -34,10 +38,9 @@ class UsersApiComponent extends Component {
             pageSize={pageSize}
             currentPage={currentPage}
             onSetCurentPage={this.onSetCurentPage}
-            isDisable={isDisable} />
-
-        return <>
-            {isLoader ? user : <Preloader />}
+            isDisable={isDisable}
+            isLoader={isLoader} />
+            
 
         </>
 
