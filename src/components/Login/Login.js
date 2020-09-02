@@ -12,7 +12,7 @@ const Login = ({logined, isAuth})=>{
     const onSubmit = (formData ) =>{
         const {email, password, rememberMe} = formData
         logined(email, password, rememberMe)
-        console.log(formData);
+        
     }
 
     if(isAuth) return <Redirect to='/profile' />

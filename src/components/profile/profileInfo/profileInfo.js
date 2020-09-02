@@ -1,12 +1,16 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 // import imgHead from './Cosmos.png'
 import s from './profileInfo.module.css'
 import Preloader from '../../common/preloaders/preloader'
 import ProfileStatusSuper from '../profileStatus/profileStatusSuper'
 import ProfileData from '../profileData/profileData'
+import ProfileDataReduxForm from '../profileData/profileDataForm'
+
 
 const ProfileInfo = ({owner,profile, status, getUpdateStatus, saveAvatar}) => {
-    // let myAva = 'https://cdn-nus-1.pinme.ru/photo/3d/d5/3dd5a78d8165ca95e6c0425aad7e3d38.jpg'
+
+    const [isEdit, setisEdit] = useState(false);
+
     if(!profile){
       return <Preloader />
     }
@@ -34,7 +38,7 @@ const ProfileInfo = ({owner,profile, status, getUpdateStatus, saveAvatar}) => {
                     {owner && <input type='file' onChange={onAvatarChange} />}
                 </div>
 
-                <ProfileData profile={profile} />
+                {isEdit ? <ProfileDataReduxForm profile={profile} /> : <ProfileData profile={profile} setisEdit={setisEdit}/>}
             </div>
         </Fragment>
     )

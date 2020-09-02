@@ -1,9 +1,10 @@
 import React from 'react'
 import s from './profileData.module.css'
 
-const ProfileData = ({profile}) => {
+const ProfileData = ({profile, setisEdit}) => {
     return (
         <div className={s.profile__data}>
+            <button onClick={()=>setisEdit(true)}>Edit</button>
             <div>
                 <b>Looking for a Job : </b> {profile.lookingForAJob ? 'Yes' : 'No'}
 

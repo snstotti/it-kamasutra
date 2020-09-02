@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './formControl.module.css'
 
-export const CostomForm = type => ({input, meta: {touched, error, warning}, ...props}) =>{
+export const CostomForm = type => ({input ,meta: {touched, error, warning}, ...props}) =>{
     
    
 
