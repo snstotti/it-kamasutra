@@ -11,7 +11,7 @@ const Profile = ({profile,  getUpdateStatus, status, owner, saveAvatar}) => {
     
     return (
         <div className={s.content}>
-            <ProfileInfo name='Nikola' owner={owner} saveAvatar={saveAvatar} profile={profile} getUpdateStatus={getUpdateStatus} status={status} />
+            <ProfileInfo name='Nikolay' owner={owner} saveAvatar={saveAvatar} profile={profile} getUpdateStatus={getUpdateStatus} status={status} />
 
             <div className={s.myPosts}>
                 <MyPostsContainer />
