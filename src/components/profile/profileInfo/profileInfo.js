@@ -7,9 +7,19 @@ import ProfileData from '../profileData/profileData'
 import ProfileDataReduxForm from '../profileData/profileDataForm'
 
 
-const ProfileInfo = ({owner,profile, status, getUpdateStatus, saveAvatar}) => {
+const ProfileInfo = ({owner,profile, status, getUpdateStatus, saveAvatar, saveProfile}) => {
 
     const [isEdit, setisEdit] = useState(false);
+    
+
+   
+
+    const onSubmit = values => {
+        
+        saveProfile(values)
+        .then(()=>setisEdit(false))
+        
+      }
 
     if(!profile){
       return <Preloader />
@@ -23,14 +33,11 @@ const ProfileInfo = ({owner,profile, status, getUpdateStatus, saveAvatar}) => {
 
     let anonim = 'https://fetside.com/images/no-image/anonymous.svg'
     let avatarUser = profile.photos.large
-        console.log(profile);
+        
     return (
         <Fragment>
             <div className={s.profile}>
                 <div className={s.avatar}>
-                    <div>
-                        <b>{profile.fullName}</b>
-                    </div>
                     <div>
                         <ProfileStatusSuper status={status} getUpdateStatus={getUpdateStatus} />
                     </div>
@@ -38,7 +45,9 @@ const ProfileInfo = ({owner,profile, status, getUpdateStatus, saveAvatar}) => {
                     {owner && <input type='file' onChange={onAvatarChange} />}
                 </div>
 
-                {isEdit ? <ProfileDataReduxForm profile={profile} /> : <ProfileData profile={profile} setisEdit={setisEdit}/>}
+                {isEdit 
+                ? <ProfileDataReduxForm initialValues={profile} onSubmit={onSubmit} profile={profile} /> 
+                : <ProfileData owner={owner} profile={profile} setisEdit={()=>setisEdit(true)}/>}
             </div>
         </Fragment>
     )

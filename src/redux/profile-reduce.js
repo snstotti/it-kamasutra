@@ -1,4 +1,5 @@
 import { profileAPI } from "../components/API/api"
+import { stopSubmit } from "redux-form"
 
 const ADD_POST = 'ADD-POST'
 const DELETE_POST = 'DELETE_POST'
@@ -6,6 +7,7 @@ const ON_POST_CHANGE = 'ON-POST-CHANGE'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_USER_STATUS = 'SET_USER_STATUS'
 const SET_USER_AVATAR = 'SET_USER_AVATAR'
+const UPDATE_PROFILE = 'UPDATE_PROFILE'
 
 let initialState = {
     
@@ -62,6 +64,13 @@ const profileReduce = (state = initialState, action) => {
                 ...state, profile: {...state.profile, photos: action.photos}
             }
         }
+        case UPDATE_PROFILE: {
+
+            return{
+                 ...state, profile: {...state.profile, profile: action.profile}
+            }
+
+        }
         default:
             return state
     }
@@ -75,11 +84,14 @@ export const setUserProfile = profile => ({ type: SET_USER_PROFILE, profile })
 export const setUserStatus = status => ({ type: SET_USER_STATUS, status })
 
 export const userProfile = (userId) => {
-    return (dispatch) => {
-        profileAPI.getProfile(userId).then(data => {
-            dispatch(setUserProfile(data))
-        })
+    return async (dispatch) => {
+        
+        let response= await profileAPI.getProfile(userId)
+        if (userId) {
+            dispatch(setUserProfile(response.data))
+        }
     }
+   
 }
 
 export const getUserStatus = (userId) => {
@@ -112,6 +124,17 @@ export const saveAvatar = (file) => {
         })
     }
 } // обновление статуса
+export const saveProfile = (profile) => async (dispatch, getState) => {
+    const userId = getState().auth.userId;
+    const response = await profileAPI.updateProfile(profile);
+
+    if (response.data.resultCode === 0) {
+        dispatch(userProfile(userId));
+    } else {
+        dispatch(stopSubmit("edit-profile", {_error: response.data.messages[0] }));
+        return Promise.reject(response.data.messages[0]);
+    }
+}
 
 
 export default profileReduce

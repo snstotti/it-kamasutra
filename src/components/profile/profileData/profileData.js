@@ -1,10 +1,13 @@
 import React from 'react'
 import s from './profileData.module.css'
 
-const ProfileData = ({profile, setisEdit}) => {
+const ProfileData = ({ profile, setisEdit, owner }) => {
     return (
         <div className={s.profile__data}>
-            <button onClick={()=>setisEdit(true)}>Edit</button>
+            {owner && <button onClick={setisEdit}>Edit</button>}
+            <div>
+                <b>Full name : </b>{profile.fullName}
+            </div>
             <div>
                 <b>Looking for a Job : </b> {profile.lookingForAJob ? 'Yes' : 'No'}
 

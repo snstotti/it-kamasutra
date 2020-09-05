@@ -36,21 +36,24 @@ export const followAPI = {
 export const profileAPI = {
 
     getProfile(userId) {
+        
         return (
+           
             instance.get(`profile/` + userId)
-                .then(responce => responce.data)
+               
         )
+        
     },
 
     getStatus(userId){
         return(
-            instance.get(`/profile/status/` + userId)
+            instance.get(`profile/status/` + userId)
         )
     },
 
     updateStatus(status){
         return(
-            instance.put(`/profile/status/`, {status})
+            instance.put(`profile/status/`, {status})
         )
     },
 
@@ -62,6 +65,12 @@ export const profileAPI = {
                 'Content-Type': 'multipart/form-data'
             }
         })
+    },
+
+    updateProfile(profile){
+        return(
+            instance.put(`profile`, profile)
+        )
     }
 
 }

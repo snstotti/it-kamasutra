@@ -7,7 +7,7 @@ export const CostomForm = type => ({input ,meta: {touched, error, warning}, ...p
 
     let hasError = touched && error
     let errorclassname = hasError ? s.inputError : ''
-
+    
     return (
         <div className={s.wrapper}>
             <input {...input} {...props} className={errorclassname} type={type} />
