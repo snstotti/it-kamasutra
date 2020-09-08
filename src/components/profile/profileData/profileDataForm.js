@@ -3,21 +3,22 @@ import s from './profileData.module.css'
 import { CostomForm } from '../../common/formControl/formControl'
 import { Field, reduxForm } from 'redux-form'
 
+const CostomFormInput = CostomForm('input')
+const CostomFormCheckbox = CostomForm('checkbox')
+
 const ProfileDataForm = ({ profile, handleSubmit }) => {
-
-    const CostomFormInput = CostomForm('input')
-    const CostomFormCheckbox = CostomForm('checkbox')
-
 
     return (
         <form className={s.profile__data} onSubmit={handleSubmit}>
-            <div><button type='submit'>Save</button></div>
+            <div>
+                <button type='submit'>Save</button>
+            </div>
             <div>
                 <b>Full Name : </b> <Field
                     placeholder='Full name'
                     component={CostomFormInput}
                     name='fullName'
-                    autoFocus={true} 
+    
                     />
             </div>
             <div>

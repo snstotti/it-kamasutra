@@ -7,29 +7,30 @@ import { required, maxLengthCreator } from '../utils/validators'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-const Login = ({logined, isAuth})=>{
+const Login = ({logined, isAuth, captchaUrl})=>{
    
     const onSubmit = (formData ) =>{
-        const {email, password, rememberMe} = formData
-        logined(email, password, rememberMe)
-        
+        const {email, password, rememberMe, captcha} = formData
+        logined(email, password, rememberMe, captcha)
+        console.log(captcha);
     }
 
     if(isAuth) return <Redirect to='/profile' />
     return(
         <div>
             <h1>Login</h1>
-             <LoginReduxForm onSubmit={onSubmit} />
+             <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
         </div>
        
     )
 }
+
 const maxLength50 = maxLengthCreator(50)
 const costomLogin = CostomForm('input')
 const costomPassword = CostomForm('password')
 const costomCheckbox = CostomForm('Checkbox')
 
-const LoginForm = ({handleSubmit, error})=>{
+const LoginForm = ({handleSubmit, error, captchaUrl})=>{
    
     return(
         <form onSubmit={handleSubmit} className={s.formLogin}>
@@ -52,6 +53,16 @@ const LoginForm = ({handleSubmit, error})=>{
                     component={costomCheckbox} 
                     name='checkbox'/> remember me
             </div>
+            <div>
+                {captchaUrl && <> 
+                    <img src={captchaUrl} alt='captcha' />
+                    <Field 
+                    placeholder='text from captcha' 
+                    validate={[required]} 
+                    component={costomLogin} 
+                    name='captcha' />
+                    </>}
+            </div>
             {error && <div className={s.errorForm}>
                 <span>{error}</span>
             </div>}
@@ -66,7 +77,8 @@ const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
 const mapStateToProps =(state)=>{
     return{
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        captchaUrl: state.auth.captchaUrl
     }
 }
 

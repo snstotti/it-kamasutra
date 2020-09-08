@@ -4,7 +4,7 @@ import s from './profileInfo.module.css'
 import Preloader from '../../common/preloaders/preloader'
 import ProfileStatusSuper from '../profileStatus/profileStatusSuper'
 import ProfileData from '../profileData/profileData'
-import ProfileDataReduxForm from '../profileData/profileDataForm'
+import ProfileDataForm from '../profileData/profileDataForm'
 
 
 const ProfileInfo = ({owner,profile, status, getUpdateStatus, saveAvatar, saveProfile}) => {
@@ -17,7 +17,7 @@ const ProfileInfo = ({owner,profile, status, getUpdateStatus, saveAvatar, savePr
     const onSubmit = values => {
         
         saveProfile(values)
-        .then(()=>setisEdit(false))
+        .then(setisEdit(false))
         
       }
 
@@ -46,7 +46,7 @@ const ProfileInfo = ({owner,profile, status, getUpdateStatus, saveAvatar, savePr
                 </div>
 
                 {isEdit 
-                ? <ProfileDataReduxForm initialValues={profile} onSubmit={onSubmit} profile={profile} /> 
+                ? <ProfileDataForm initialValues={profile} onSubmit={onSubmit} profile={profile} /> 
                 : <ProfileData owner={owner} profile={profile} setisEdit={()=>setisEdit(true)}/>}
             </div>
         </Fragment>

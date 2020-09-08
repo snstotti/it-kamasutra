@@ -23,7 +23,6 @@ class ProfileContainer extends Component {
         }
         this.props.userProfile(userId)
         this.props.getUserStatus(userId)
-       
     }
 
     componentDidMount(){
@@ -39,9 +38,11 @@ class ProfileContainer extends Component {
     }
     
     render(){
+        
         return (
             <Profile {...this.props} owner={!this.props.match.params.userId} />
         )
+        
     }
 }
 

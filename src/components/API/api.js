@@ -69,7 +69,7 @@ export const profileAPI = {
 
     updateProfile(profile){
         return(
-            instance.put(`profile`, profile)
+            instance.put(`profile/`, profile)
         )
     }
 
@@ -78,19 +78,28 @@ export const profileAPI = {
 export const authAPI = {
     me() {
         return (
-            instance.get(`auth/me`)
+            instance.get(`auth/me/`)
         )
     },
 
-    login(email, password, rememberMe) {
+    login(email, password, rememberMe, captcha=null) {
         return (
-            instance.post(`auth/login`, {email, password, rememberMe})
+            instance.post(`auth/login/`, {email, password, rememberMe, captcha})
         )
     },
 
     logout() {
         return (
-            instance.delete(`auth/login`)
+            instance.delete(`auth/login/`)
+        )
+    }
+
+}
+
+export const securityAPI = {
+    captchaUrl() {
+        return (
+            instance.get(`security/get-captcha-url/`)
         )
     }
 
